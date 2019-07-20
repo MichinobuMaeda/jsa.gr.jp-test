@@ -1,0 +1,22 @@
+htdocs
+local/**/*.[Jj][Pp][Gg]
+local/**/*.[Zz][Ii][Pp]
+local/**/*.[Pp][Dd][Ff]
+.vscode
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# OS X
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*

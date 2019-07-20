@@ -1,0 +1,98 @@
+日本の科学者 目次掲載手順
+
+1. 『日本の科学者』編集委員会からの依頼メール
+
+  a. 目次 : メール本文
+
+    --> インデントを全角スペース 3個にする。ときどき半角が混じっている。
+
+  b. 表紙画像 : JPEG
+
+    --> 横300ピクセルに縮小する。
+
+  c. まえがき : PDF
+
+      --> そのままコピーする
+
+2. 現状のサーバ上のファイルをダウンロード
+
+  対象になるファイルとディレクトリは以下の通り。
+
+  htdocs
+  |
+  |   index.html        -- トップページ
+  |   jjs-cover-s.jpg   -- 表紙画像
+  |
+  +-- 04pub
+      |
+      |   index.html    -- 出版物ページ
+      |
+      +-- 0401jjs       -- 総目次
+      |
+      |       ...
+      |       2013contents.html
+      |
+      +-- 2013          -- まえがき
+
+              201301JJStokusyu.pdf
+              ...
+
+3. ローカルにダウンロードしたファイルの編集
+
+  3.1. 表紙画像を置き換える
+
+    /htdocs/jjs-cover-s.jpg
+
+  3.2. まえがきを置く
+
+    /htdocs/04pub/2013/2013xxJJStokusyu.pdf
+
+    年が変わったらディレクトリの追加が必要です。
+
+  3.3. 総目次に追加する。
+
+    /htdocs/04pub/0401jjs/2013contents.html
+
+    リンクの確認: まえがき
+    年が変わったらファイルの追加が必要です。
+
+  3.4. 出版物ページに特集の目次を追加する。
+
+    /htdocs/04pub/index.html
+
+    リンクの確認: 目次、まえがき
+
+  3.5. トップページを編集する。
+
+    /htdocs/index.html
+
+    Short Term
+    Contents の "New"
+    今月の「日本の科学者」の＜特集＞
+
+    リンクの確認: Short Term の 日本の科学者
+
+4. アップロード
+
+  他の人がトップページを更新していないか確認する。
+  トップページより遠いファイルから。
+
+  /htdocs/04pub/2013/2013xxJJStokusyu.pdf -- まえがき
+  /htdocs/04pub/0401jjs/2013contents.html -- 総目次
+  /htdocs/04pub/index.html -- 出版
+  /htdocs/jjs-cover-s.jpg -- 表紙画像
+  /htdocs/index.html -- トッ飛び猫写真家プページ
+
+5. 作業完了の通知
+
+To: 『日本の科学者』編集委員会 <jjs2007@jsa.gr.jp>
+Cc: s-ihara075@nifty.com, JSA情報・通信室各位 <joho@jsa.gr.jp>
+
+上野 様
+
+情報・通信室の前田です。お世話になっております。
+
+『日本の科学者』目次を更新いたしました。
+http://jsa.gr.jp/04pub/index.html#nihonnokagakusya
+
+よろしくお願いいたします。
