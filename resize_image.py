@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import sys
 from PIL import Image
 
