@@ -1,9 +1,11 @@
 .idea/
 htdocs
+www
 local/**/*.[Jj][Pp][Gg]
 local/**/*.[Zz][Ii][Pp]
 local/**/*.[Pp][Dd][Ff]
 .vscode
+.idea
 venv
 
 # Windows
