@@ -1,6 +1,10 @@
-.idea/
 htdocs
 www
+twitter/account.*
+twitter/*.log
+twitter/shortterm.txt
+
+.idea/
 local/**/*.[Jj][Pp][Gg]
 local/**/*.[Zz][Ii][Pp]
 local/**/*.[Pp][Dd][Ff]
