@@ -3,6 +3,7 @@ www
 twitter/account.*
 twitter/*.log
 twitter/shortterm.txt
+twitter/vendor
 
 .idea/
 local/**/*.[Jj][Pp][Gg]
