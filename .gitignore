@@ -12,6 +12,7 @@ local/**/*.[Pp][Dd][Ff]
 .vscode
 .idea
 venv
+.venv
 
 # Windows
 Thumbs.db
