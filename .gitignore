@@ -1,5 +1,6 @@
 htdocs
 www
+linkchecker/*.log
 twitter/account.*
 twitter/*.log
 twitter/shortterm.txt
