@@ -4,6 +4,9 @@ twitter/account.*
 twitter/*.log
 twitter/shortterm.txt
 twitter/vendor
+data
+passwd
+log
 
 .idea/
 local/**/*.[Jj][Pp][Gg]
