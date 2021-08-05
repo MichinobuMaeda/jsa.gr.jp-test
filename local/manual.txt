@@ -87,7 +87,7 @@
 5. 作業完了の通知
 
 To: 『日本の科学者』編集委員会 <jjs2007@jsa.gr.jp>
-Cc: s-ihara075@nifty.com, JSA情報・通信室各位 <joho@jsa.gr.jp>
+Cc: JSA情報・通信室各位 <joho@jsa.gr.jp>
 
 上野 様
 
