@@ -5,6 +5,10 @@
 //   新規作成。
 // 2021-03-17 Michinobu Maeda
 //   HTMLを出力する処理を追加。
+// 2021-10-09 Michinobu Maeda
+//   通常のページではないパターンを追加。一覧のリンクの ? から右を削除。
+// 2021-10-11 Michinobu Maeda
+//   リンクの中の < と > を &lt; と &rt; に変換する処理を追加。
 // --
 // 1. 起動
 //   php -c /.../etc/php_customized.ini accessloganalyzer.php
@@ -105,7 +109,9 @@ foreach (scandir(LOG_PATH) as $log) {
             $path === '/robots.txt' ||
             0 === strpos($path, '/cgi-bin/') ||
             preg_match('/^\/pukiwiki\/.*=/', $path) ||
-            preg_match('/^\/d\/lib\//', $path)
+            preg_match('/^\/d\/lib\//', $path) ||
+            preg_match('/^\/d\/redirect:d_doku.php\?/', $path) ||
+            preg_match('/^\/d\/.*\?do=(admin|login|register)/', $path)
         ) {
             $type = 'p';
         } else {
@@ -277,7 +283,15 @@ function output_table ($file_name, $oh, $link_base = null) {
             foreach ($rec as $item) {
                 if ($first_col) {
                     if ($link_base && substr($item, 0, 1) === '/') {
-                        fwrite($oh, '<th><a href="'.$link_base.$item.'">'.$item.'</a></th>');
+                        fwrite($oh, '<th><a href="'
+                        .preg_replace('/\?.*/', '',
+                            preg_replace('/</', '&lt;',
+                                preg_replace('/>/', '&rt;', $item)
+                            )
+                        ).'">'
+                        .preg_replace('/</', '&lt;',
+                            preg_replace('/>/', '&rt;', $item)
+                        ).'</a></th>');
                     } else {
                         fwrite($oh, '<th>'.$item.'</th>');
                     }
