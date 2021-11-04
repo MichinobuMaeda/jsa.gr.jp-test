@@ -180,7 +180,7 @@ foreach (scandir(OUT_PATH, SCANDIR_SORT_ASCENDING) as $txt) {
 fclose($oh);
 
 // 月別の集計を出力する。
-function make_montyli_list ($file_name, $item_index, $item_name) {
+function make_monthly_list ($file_name, $item_index, $item_name) {
     $ih = fopen(OUT_PATH . '/access_log_all.txt', 'r');
     $montly = [];
     $total = [];
@@ -259,10 +259,10 @@ function make_montyli_list ($file_name, $item_index, $item_name) {
 }
 
 // 月別OS別集計を出力する。
-make_montyli_list ('monthly_os.txt', 1, 'OS');
+make_monthly_list ('monthly_os.txt', 1, 'OS');
 
 // 月別ページ別集計を出力する。
-make_montyli_list ('monthly_page.txt', 2, 'Page');
+make_monthly_list ('monthly_page.txt', 2, 'Page');
 
 // HTMLを出力する。
 
