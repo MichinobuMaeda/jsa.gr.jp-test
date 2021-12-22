@@ -29,7 +29,7 @@ getAllFiles($file_list, '');
 // すべてのHTMLファイルについて、
 foreach (array_keys($file_list) as $path) {
     // if ($path === '/04pub/0401jjs/2021contents.html') {
-    if (preg_match('/\.(html|html|php)$/i', $path)) {
+    if (preg_match('/\.(html|htm|php)$/i', $path)) {
         $html = file_get_contents(DOC_ROOT.'/'.$path);
         $matches = [];
         preg_match_all('/[^A-Za-z](src|href)="([^#][^"#?]*)"/i', $html, $matches);
