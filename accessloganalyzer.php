@@ -9,6 +9,8 @@
 //   通常のページではないパターンを追加。一覧のリンクの ? から右を削除。
 // 2021-10-11 Michinobu Maeda
 //   リンクの中の < と > を &lt; と &rt; に変換する処理を追加。
+// 2022-01-07 Michinobu Maeda
+//   日別7日分ページ別集計を追加。
 // --
 // 1. 起動
 //   php -c /.../etc/php_customized.ini accessloganalyzer.php
@@ -45,8 +47,16 @@ define('LOG_PATH', __DIR__ . '/log');
 // 出力ファイルのディレクトリ
 define('OUT_PATH', __DIR__ . '/data');
 
+// 会員専用コーナーのパス
+define('MEMBER_PATH', __DIR__ . '/www/zenkoku/member/access');
+
 // HTMLのパス
-define('HTML_PATH', __DIR__ . '/www/zenkoku/member/access/index.html');
+define('HTML_PATH', MEMBER_PATH . '/index.html');
+
+// 集計期間の単位
+define('YEARLY', 4);
+define('MONTHLY', 7);
+define('DAILY', 10);
 
 // ログファイルを解凍する一時ファイル
 $temp = LOG_PATH . '/accessloganalyzer.tmp';
@@ -179,27 +189,27 @@ foreach (scandir(OUT_PATH, SCANDIR_SORT_ASCENDING) as $txt) {
 
 fclose($oh);
 
-// 月別の集計を出力する。
-function make_monthly_list ($file_name, $item_index, $item_name) {
+// 単位期間毎の集計を出力する。
+function make_periodic_list ($out_path, $item_index, $item_name, $period_size, $max = 999) {
     $ih = fopen(OUT_PATH . '/access_log_all.txt', 'r');
-    $montly = [];
+    $periodic = [];
     $total = [];
     while (($line = fgets($ih)) !== false) {
         if (preg_match('/^\d/', $line)) {
             $rec = explode("\t", trim($line));
-            $month = substr($rec[0], 0, 7);
+            $period = substr($rec[0], 0, $period_size);
             $item = $rec[$item_index];
-            if (!array_key_exists($month, $montly)) {
-                $montly[$month] = [];
+            if (!array_key_exists($period, $periodic)) {
+                $periodic[$period] = [];
             }
-            if (!array_key_exists($item, $montly[$month])) {
-                $montly[$month][$item] = 0;
+            if (!array_key_exists($item, $periodic[$period])) {
+                $periodic[$period][$item] = 0;
             }
             if (!array_key_exists($item, $total)) {
                 $total[$item] = 0;
             }
             $total[$rec[$item_index]]++;
-            $montly[$month][$rec[$item_index]]++;
+            $periodic[$period][$rec[$item_index]]++;
         }
     }
 
@@ -219,36 +229,37 @@ function make_monthly_list ($file_name, $item_index, $item_name) {
         $item_list[] = $item[$item_name];
     }
 
-    // 新しい順の月のリストを作成する。
-    $month_list = array_keys($montly);
-    sort($month_list);
+    // 新しい順の期間のリストを作成する。
+    $period_list = array_keys($periodic);
+    sort($period_list);
+    $period_list = array_slice($period_list, -$max);
 
-    $oh = fopen(OUT_PATH . '/' . $file_name, 'w');
+    $oh = fopen($out_path, 'w');
     // 見出し行を出力する。
     fwrite($oh, $item_name);
-    foreach ($month_list as $month) {
-        fwrite($oh, "\t".$month);
+    foreach ($period_list as $period) {
+        fwrite($oh, "\t".$period);
     }
     fwrite($oh, PHP_EOL);
     // 月別項目別集計値を出力する。
     foreach ($item_list as $item) {
         fwrite($oh, $item);
-        foreach ($month_list as $month) {
-            if (array_key_exists($item, $montly[$month])) {
-                fwrite($oh, "\t".$montly[$month][$item]);
+        foreach ($period_list as $period) {
+            if (array_key_exists($item, $periodic[$period])) {
+                fwrite($oh, "\t".$periodic[$period][$item]);
             } else {            
                 fwrite($oh, "\t0");
             }
         }
         fwrite($oh, PHP_EOL);
     }
-    // 月別合計を出力する。
+    // 期間別合計を出力する。
     fwrite($oh, '計');
-    foreach ($month_list as $month) {
+    foreach ($period_list as $period) {
         $sum = 0;
         foreach ($item_list as $item) {
-            if (array_key_exists($item, $montly[$month])) {
-                $sum += $montly[$month][$item];
+            if (array_key_exists($item, $periodic[$period])) {
+                $sum += $periodic[$period][$item];
             }
         }
         fwrite($oh, "\t".$sum);
@@ -258,11 +269,14 @@ function make_monthly_list ($file_name, $item_index, $item_name) {
     fclose($ih);
 }
 
+// 日別7日分ページ別集計を出力する。
+make_periodic_list (MEMBER_PATH . '/daily_page.txt', 2, 'Page', DAILY, 7);
+
 // 月別OS別集計を出力する。
-make_monthly_list ('monthly_os.txt', 1, 'OS');
+make_periodic_list (OUT_PATH . '/monthly_os.txt', 1, 'OS', MONTHLY);
 
 // 月別ページ別集計を出力する。
-make_monthly_list ('monthly_page.txt', 2, 'Page');
+make_periodic_list (OUT_PATH . '/monthly_page.txt', 2, 'Page', MONTHLY);
 
 // HTMLを出力する。
 
