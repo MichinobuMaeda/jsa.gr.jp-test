@@ -1,6 +1,6 @@
 htdocs
 OLD
-www
+log
 linkchecker/*.log
 twitter/account.*
 twitter/*.log
@@ -8,7 +8,7 @@ twitter/shortterm.txt
 twitter/vendor
 data
 passwd
-log
+env.sh
 
 .idea/
 local/**/*.[Jj][Pp][Gg]
@@ -16,7 +16,6 @@ local/**/*.[Zz][Ii][Pp]
 local/**/*.[Pp][Dd][Ff]
 .vscode
 .idea
-venv
 .venv
 
 # Windows

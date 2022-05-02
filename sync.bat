@@ -2,4 +2,4 @@ rsync -av --delete -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/h
 rsync -av --delete -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/home/jsazenkoku/OLD/* ./OLD/
 rsync -av --delete -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/home/jsazenkoku/data/* ./data/
 rsync -av          -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/home/jsazenkoku/log/* ./log/
-rsync -av --delete -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/home/jsazenkoku/linkchecker/* ./linkchecker/
+rsync -av          -e "ssh -F %USERPROFILE%\.ssh\config" jsazenkoku@jsa.gr.jp:/home/jsazenkoku/linkchecker/* ./linkchecker/
