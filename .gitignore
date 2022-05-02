@@ -9,6 +9,8 @@ twitter/vendor
 data
 passwd
 env.sh
+env.bat
+env.ps1
 
 .idea/
 local/**/*.[Jj][Pp][Gg]
