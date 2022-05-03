@@ -15,5 +15,5 @@ $trg_height = round($src_height * $trg_width / $src_witdh);
 $trg_img = imagecreatetruecolor($trg_width, $trg_height);
 imagecopyresampled($trg_img, $src_image, 0, 0, 0, 0, $trg_width, $trg_height, $src_witdh, $src_height);
 
-// Write the target image
+// Save the target image
 imagejpeg($trg_img, __DIR__ . '/www/zenkoku/jjs-cover-s.jpg');
