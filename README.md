@@ -4,7 +4,7 @@
 
 ### A.1. ツール一式
 
-https://github.com/MichinobuMaeda/jsa.gr.jp-test の Code ボタンの Download ZIP リンクからダウンロードして、どこか ( 例: `C:\jsazennkoku` ) に解凍する。
+https://github.com/MichinobuMaeda/jsa.gr.jp-test の Code ボタンの Download ZIP リンクからダウンロードして、どこか ( 例: `C:\home\jsazenkoku` ) に解凍する。
 
 ![Code - Download ZIP](local/code-dowload-zip.png)
 
@@ -19,6 +19,7 @@ https://github.com/MichinobuMaeda/jsa.gr.jp-test の Code ボタンの Download 
 
 コマンドプロンプトを開いてこのバッチを実行する。
 
+    > cd C:\home\jsazenkoku
     > env.bat
 
 PHPが正常に動くことを確認する。
@@ -27,15 +28,13 @@ PHPが正常に動くことを確認する。
 
 コマンドプロンプトでなく PowerShell を利用する場合は `*.bat` の代わりに `*.ps1` を使う。
 
-『日本の科学者』表紙画像リサイズのスクリプトを利用する場合は、PHPを置いたフォルダの `php.ini-development` を同じフォルダの `php.ini` にコピーして、以下の 2か所を変更する。
+PHPを置いたフォルダの `php.ini-development` を同じフォルダの `php.ini` にコピーして、以下の 3か所の先頭の `;` を削除する。
 
-先頭の `;` を削除する。
+    ;extension_dir = "ext"
 
-    extension_dir = "ext"
+    ;extension=gd2
 
-先頭の `;` を削除する。
-
-    extension=gd2
+    ;extension=mbstring
 
 
 #### A.2.2. Mac OS の場合
@@ -71,11 +70,13 @@ PHPが正常に動くことを確認する。
 
 PC上でテスト用サイトを起動する。
 
+    > cd C:\home\jsazenkoku
     > php -S localhost:8000 -t www/zenkoku router.php
 
 テスト用サイトは http://localhost:8000/ で参照できる。以下の2点を除き、本物と見た目は同じ。
+リンクで本物に移動してしまったら https://jsa.gr.jp/ を http://localhost:8000/ に置き換える。
 
-- Dokuwiki は正常に動作しない。
+- Dokuwiki と PukiWiki は表示だけ。編集機能などは使えない。
 - 会員専用コーナーはID・パスワード無しで参照できる。
 
 `rsync` や `scp` が利用できる場合は `sync.bat` または `sync.sh` でサーバのファイルのダウンロード、 `upload.php` でファイルのアップロード、 `upload-jjs.php` で『日本の科学者』目次更新時の一括アップロードができる。
