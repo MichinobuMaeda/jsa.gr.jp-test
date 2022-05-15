@@ -11,9 +11,11 @@ if (in_array($ext, ['html', 'htm'])) {
     $encoding = str_replace('SJIS', 'Shift_JIS', $encoding);
     header('Content-Type: text/html; charset=' . $encoding);
     return eval('?> ' . $data);
-} else if ($_SERVER["REQUEST_URI"] == $dokuwiki_base
-    || substr($_SERVER["REQUEST_URI"], 0, strlen($dokuwiki_base) + 1) == $dokuwiki_base . '/') {
-    $req = substr($_SERVER["REQUEST_URI"], strlen($dokuwiki_base));
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET'
+    && ($_SERVER['REQUEST_URI'] == $dokuwiki_base
+        || substr($_SERVER['REQUEST_URI'], 0, strlen($dokuwiki_base) + 1) == $dokuwiki_base . '/')
+    ) {
+    $req = substr($_SERVER['REQUEST_URI'], strlen($dokuwiki_base));
 
     if (substr($req, 0, strlen('/_media/')) == '/_media/') {
         $param = str_replace('?', '&', substr($req, strlen('/_media/')));
@@ -25,11 +27,12 @@ if (in_array($ext, ['html', 'htm'])) {
         return true;
     } else if ($req == '' || $req == '/' || $req == '/index.php') {
         include $doc_root . $dokuwiki_base . '/doku.php';
-    } else if (file_exists($doc_root . $dokuwiki_base . preg_replace('/\?.*/', '', $req))) {
-        return false;
-    } else if (preg_match('/\?do=/', $req)) {
+    } else if (preg_match('/\?do=/', $req)
+        && substr($req, 0, strlen('/doku.php?do=')) != '/doku.php?do=') {
         header('Location: ' . $dokuwiki_base . '/doku.php?do=' . preg_replace('/.*\?do=/', '', $req));
         return true;
+    } else if (file_exists($doc_root . $dokuwiki_base . preg_replace('/\?.*/', '', $req))) {
+        return false;
     } else {
         header('Location: ' . $dokuwiki_base . '/doku.php?id=' . substr($req, 1));
         return true;

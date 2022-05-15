@@ -76,13 +76,17 @@ PC上でテスト用サイトを起動する。
 テスト用サイトは http://localhost:8000/ で参照できる。以下の2点を除き、本物と見た目は同じ。
 リンクで本物に移動してしまったら https://jsa.gr.jp/ を http://localhost:8000/ に置き換える。
 
-- Dokuwiki と PukiWiki は表示だけ。編集機能などは使えない。
+- DokuWiki と PukiWiki は表示だけ。編集機能などは使えない。
 - 会員専用コーナーはID・パスワード無しで参照できる。
+
+DokuWiki の編集機能を使いたい場合は `www/zenkoku/d/conf/local.php` の次の値を 1 から 0 に変更する。ただし、動作の保証はできない。また、編集したものをアップロードすることもできないので。本物の方で編集し直すこと。
+
+    $conf['userewrite'] = '1';
 
 `rsync` や `scp` が利用できる場合は `sync.bat` または `sync.sh` でサーバのファイルのダウンロード、 `upload.php` でファイルのアップロード、 `upload-jjs.php` で『日本の科学者』目次更新時の一括アップロードができる。
 
 ### B.2. 『日本の科学者』表紙画像のリサイズ
 
-事務局から受け取った『日本の科学者』の表紙の画像 `jjsYYYYMM.jpg` を幅300ピクセルに縮小したものを　`www/zenkoku/jjs-cover-s.jpg` にコピーする。
+事務局から受け取った『日本の科学者』の表紙の画像 `jjsYYYYMM.jpg` を幅300ピクセルに縮小したものを　`www/zenkoku/jjs-cover-s.jpg` にコピーする方法。
 
     > php resize_image.php path_to/jjsYYYYMM.jpg
