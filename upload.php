@@ -6,4 +6,6 @@ function upload($src_path) {
 
 if (count($argv) > 1) {
     upload($argv[1]);
+} else {
+    echo "\nUsage: php upload.php www/zenkoku/path_to/filename.html\n\n";
 }
