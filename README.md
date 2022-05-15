@@ -26,13 +26,8 @@ https://github.com/MichinobuMaeda/jsa.gr.jp-test の Code ボタンの Download 
 
 ツール一式の中の `env_sample.bat` を同じフォルダの `env.bat` にコピーして `PHP_HOME` の値をPHPを置いた場所に変更する。
 
-ツール一式の中の `phpinfo.bat` を実行してPHPが正常に動くことを確認する。次のよう表示されるはず。
+ツール一式の中の `phpinfo.bat` を実行してPHPが正常に動くことを確認する。終わりの方に次のよう表示されるはず。
 
-    phpinfo()
-    PHP Version => 7.4.29
-    
-     ... 途中略...
-    
     If you did not receive a copy of the PHP license, or have any
     questions about PHP licensing, please contact license@php.net.
     PHP 7.4.29 (cli) (built: Apr 14 2022 18:14:39) ( NTS Visual C++ 2017 x86 )
