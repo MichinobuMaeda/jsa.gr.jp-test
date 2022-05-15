@@ -81,6 +81,15 @@ DokuWiki の編集機能を使いたい場合は `www/zenkoku/d/conf/local.php` 
     $conf['userewrite'] = '1';
 
 
+### 6. PowerShell の利用
+
+`*.bat` の代わりに `*.ps1` を使ことが可能だが、
+Windows 10 / Windows 11 などでは実行ポリシーの変更が必要。
+Windows PowerShell を「管理者として実行」で起動して次のコマンドを実行すること。
+
+    Set-ExecutionPolicy RemoteSigned
+
+
 ## Mac OS の場合
 
 PHP を Homebrew 等でインストールする。
