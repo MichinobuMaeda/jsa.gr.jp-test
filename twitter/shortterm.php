@@ -71,7 +71,7 @@ while (($line = fgets($handle)) !== false) {
         // 末尾の日付 m/d を削除する。
         $message = preg_replace('/\s*\d+\s*\/\s*\d+\s*$/', '', $matches[3]);
         $sending[] = $matches[0];
-        $messages[] = '['.$page."]\n".$url."\n".$message;
+        $messages[] = '['.$page."]\n".$message."\n".$url;
     }        
 }
 fclose($handle);
