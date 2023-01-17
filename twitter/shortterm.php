@@ -66,7 +66,10 @@ while (($line = fgets($handle)) !== false) {
         if (preg_match('/^member\//', $matches[1])) {
             continue;
         }
-        $url = $siteUrl.$matches[1];
+        $url = $matches[1];
+        if (!preg_match('/^(http|https):\/\//', $url)) {
+            $url = $siteUrl.$url;
+        }
         $page = $matches[2];
         // 末尾の日付 m/d を削除する。
         $message = preg_replace('/\s*\d+\s*\/\s*\d+\s*$/', '', $matches[3]);
