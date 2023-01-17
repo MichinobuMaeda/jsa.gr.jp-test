@@ -63,12 +63,12 @@ while (($line = fgets($handle)) !== false) {
         if (in_array($matches[0], $sent)) {
             break;
         }
-        if (preg_match('/^member\//', $matches[1])) {
-            continue;
-        }
         $url = $matches[1];
-        if (!preg_match('/^(http|https):\/\//', $url)) {
+        if (!(str_starts_with($url, 'http://') || str_starts_with($url, 'https://'))) {
             $url = $siteUrl.$url;
+        }
+        if (str_starts_with($url, $siteUrl.'member/')) {
+            continue;
         }
         $page = $matches[2];
         // 末尾の日付 m/d を削除する。
